@@ -22,9 +22,9 @@ public class CalculatorService {
 
     public BigDecimal divide(BigDecimal a, BigDecimal b) {
         if (b.compareTo(BigDecimal.ZERO) == 0){
-            throw new ArithmeticException("Divide by zero");
+            throw new ArithmeticException("Division by zero");
         }else{
-            return a.divide(b,10, RoundingMode.HALF_UP);
+            return a.divide(b,3, RoundingMode.HALF_UP);
         }
     }
 }
