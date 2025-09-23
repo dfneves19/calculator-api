@@ -17,8 +17,9 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>rest</module>
+        <module>shared</module>
         <module>calculator</module>
+        <module>rest</module>
     </modules>
 
     <properties>
