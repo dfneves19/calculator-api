@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 public class CalculatorResponse {
     private BigDecimal result;
 
-    CalculatorResponse(BigDecimal result) {
+    public CalculatorResponse(BigDecimal result) {
         this.result = result;
     }
 
