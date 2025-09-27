@@ -14,11 +14,10 @@ services:
 
       # Listener config
       KAFKA_LISTENERS: PLAINTEXT://:9092,CONTROLLER://:9093
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
 
-      # Controller quorum (KRaft replaces Zookeeper)
-      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@localhost:9093
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
       KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
 
       # Minimal replication factor (since it's single-node)
@@ -27,3 +26,29 @@ services:
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
 
       CLUSTER_ID: "abcdefghijklmnopqrstuv"  # 22-char base64 string
+
+  rest:
+    build:
+      context: .
+      dockerfile: rest/Dockerfile
+    depends_on:
+      - kafka
+    environment:
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      SERVER_PORT: 8081
+    ports:
+      - "8081:8081"
+
+  calculator:
+    build:
+      context: .
+      dockerfile: calculator/Dockerfile
+    depends_on:
+      - kafka
+      - rest
+    environment:
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      SERVER_PORT: 8080
+    ports:
+      - "8080:8080"
+

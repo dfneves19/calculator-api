@@ -3,9 +3,11 @@ package com.spring.calc.shared.dto;
 import java.math.BigDecimal;
 
 public class CalculatorRequest {
-    public BigDecimal a;
-    public BigDecimal b;
-    public String operation;
+    private BigDecimal a;
+    private BigDecimal b;
+    private String operation;
+
+    public CalculatorRequest() {}
 
     public CalculatorRequest(BigDecimal a, BigDecimal b, String operation) {
         this.a = a;
@@ -25,15 +27,12 @@ public class CalculatorRequest {
         return operation;
     }
 
-    public void setA(BigDecimal a) {
-        this.a = a;
-    }
-
-    public void setB(BigDecimal b) {
-        this.b = b;
-    }
-
-    public void setOperation(String operation) {
-        this.operation = operation;
+    @Override
+    public String toString() {
+        return "CalculatorRequest{" +
+                "a=" + a +
+                ", b=" + b +
+                ", operation='" + operation + '\'' +
+                '}';
     }
 }

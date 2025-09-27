@@ -4,15 +4,20 @@ import java.math.BigDecimal;
 
 public class CalculatorResponse {
     private BigDecimal result;
+    private boolean success;
 
-    public CalculatorResponse(BigDecimal result) {
+    public CalculatorResponse() {}
+
+    public CalculatorResponse(BigDecimal result, boolean success) {
         this.result = result;
+        this.success = success;
     }
 
     public BigDecimal getResult() {
         return result;
     }
-    public void setResult(BigDecimal result) {
-        this.result = result;
+
+    public boolean getSuccess() {
+        return success;
     }
 }
